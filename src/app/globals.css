@@ -1,0 +1,220 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Virya Energy design tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-source-sans), "Source Sans Pro", Helvetica, Arial, sans-serif;
+  --font-heading: var(--font-source-sans), "Source Sans Pro", Helvetica, Arial, sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 2.5);
+  --radius-4xl: calc(var(--radius) * 3);
+
+  /* Virya custom color tokens */
+  --color-virya-orange: #ff5938;
+  --color-virya-beige: #eee8e2;
+  --color-virya-muted: #9f908d;
+  --color-virya-dark: #1f1e1e;
+  --color-virya-light: #fefefe;
+  --color-virya-green: #185649;
+  --color-virya-dark-green: #0f4338;
+  --color-virya-sage: #8fa89e;
+  --color-virya-stat-card: #afc2bb;
+}
+
+:root {
+  /* Map Virya palette to shadcn tokens */
+  --background: #fefefe;
+  --foreground: #1f1e1e;
+  --card: #ffffff;
+  --card-foreground: #1f1e1e;
+  --popover: #ffffff;
+  --popover-foreground: #1f1e1e;
+  --primary: #ff5938;
+  --primary-foreground: #ffffff;
+  --secondary: #eee8e2;
+  --secondary-foreground: #1f1e1e;
+  --muted: #eee8e2;
+  --muted-foreground: #9f908d;
+  --accent: #eee8e2;
+  --accent-foreground: #1f1e1e;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #e8e0d8;
+  --input: #e8e0d8;
+  --ring: #ff5938;
+  --radius: 1rem;
+  --sidebar: #fefefe;
+  --sidebar-foreground: #1f1e1e;
+  --sidebar-primary: #ff5938;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eee8e2;
+  --sidebar-accent-foreground: #1f1e1e;
+  --sidebar-border: #e8e0d8;
+  --sidebar-ring: #ff5938;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+  html {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Virya global utility classes */
+@layer utilities {
+  .text-virya-orange { color: #ff5938; }
+  .text-virya-muted { color: #9f908d; }
+  .text-virya-dark { color: #1f1e1e; }
+  .text-virya-light { color: #fefefe; }
+  .bg-virya-beige { background-color: #eee8e2; }
+  .bg-virya-orange { background-color: #ff5938; }
+  .bg-virya-green { background-color: #185649; }
+  .bg-virya-dark-green { background-color: #0f4338; }
+
+  /* Heading styles matching Virya */
+  .virya-h1 {
+    font-size: clamp(60px, 8.33vw, 120px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .virya-h2 {
+    font-size: clamp(36px, 3.84vw, 55.25px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .virya-h2-split {
+    /* "Our expertise" style — dark word + muted word */
+  }
+  .virya-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: #ff5938;
+    color: #ffffff;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: background 0.2s ease, opacity 0.2s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .virya-btn-primary:hover {
+    background: #e04a2c;
+  }
+  .virya-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: transparent;
+    color: #fefefe;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    border: 1.5px solid rgba(254, 254, 254, 0.6);
+    transition: background 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+  .virya-btn-outline:hover {
+    background: rgba(254, 254, 254, 0.1);
+    border-color: rgba(254, 254, 254, 0.9);
+  }
+  .virya-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: transparent;
+    color: #1f1e1e;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    border: 1.5px solid rgba(31, 30, 30, 0.25);
+    transition: border-color 0.2s ease;
+    cursor: pointer;
+  }
+  .virya-btn-ghost:hover {
+    border-color: rgba(31, 30, 30, 0.6);
+  }
+
+  /* Section wrapper with max-width */
+  .virya-wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+  @media (max-width: 1024px) {
+    .virya-wrapper { padding: 0 40px; }
+  }
+  @media (max-width: 640px) {
+    .virya-wrapper { padding: 0 24px; }
+  }
+}
+
+/* Fade-in animation for scroll-triggered sections */
+@keyframes virya-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: virya-fade-up 0.7s ease forwards;
+}
+
+/* Scrollbar hiding */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
