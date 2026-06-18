@@ -1,6 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import { useInView, fadeUp } from "@/hooks/useInView";
 
 export function NABCEPBar() {
+  const { ref, inView } = useInView();
+
   return (
     <section
       style={{
@@ -10,8 +15,10 @@ export function NABCEPBar() {
       }}
     >
       <div
+        ref={ref}
         className="nabcep-bar-inner"
         style={{
+          ...fadeUp(inView),
           maxWidth: 1200,
           margin: "0 auto",
           padding: "0 40px",

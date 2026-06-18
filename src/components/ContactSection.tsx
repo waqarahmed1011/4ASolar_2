@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useInView, fadeUp } from "@/hooks/useInView";
 
 const SERVICE_OPTIONS = [
   "Residential Solar",
@@ -35,6 +36,7 @@ export function ContactSection() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+  const { ref, inView } = useInView();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -118,6 +120,7 @@ export function ContactSection() {
     <section id="contact" style={{ background: "#1f1e1e", padding: "80px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px" }}>
         <div
+          ref={ref}
           className="contact-grid"
           style={{
             display: "grid",
@@ -127,7 +130,7 @@ export function ContactSection() {
           }}
         >
           {/* Left: form */}
-          <div>
+          <div style={fadeUp(inView)}>
             <h2
               style={{
                 fontSize: "clamp(32px, 3.5vw, 48px)",
@@ -339,7 +342,7 @@ export function ContactSection() {
           </div>
 
           {/* Right: contact info */}
-          <div style={{ paddingTop: 8 }}>
+          <div style={{ paddingTop: 8, ...fadeUp(inView, 0.15) }}>
             <h3
               style={{
                 fontSize: 20,

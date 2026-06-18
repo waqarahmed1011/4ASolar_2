@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useInView, fadeUp } from "@/hooks/useInView";
 
 const panels = [
   {
@@ -91,10 +92,12 @@ export function HighlighterServices() {
   }, [displayedWord, isTyping, panelIndex]);
 
   const currentPanel = panels[panelIndex];
+  const { ref, inView } = useInView();
 
   return (
     <section style={{ background: "#ffffff", padding: "80px 0" }}>
       <div
+        ref={ref}
         className="highlighter-grid"
         style={{
           maxWidth: 1200,
@@ -106,7 +109,7 @@ export function HighlighterServices() {
           alignItems: "center",
         }}
       >
-        <div>
+        <div style={fadeUp(inView)}>
           <h2
             style={{
               fontSize: "clamp(32px, 3.5vw, 52px)",
@@ -161,7 +164,7 @@ export function HighlighterServices() {
           </Link>
         </div>
 
-        <div className="flex justify-center highlighter-right">
+        <div className="flex justify-center highlighter-right" style={fadeUp(inView, 0.18)}>
           <div style={{ position: "relative" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

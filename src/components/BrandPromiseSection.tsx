@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useInView, fadeUp } from "@/hooks/useInView";
 
 const services = [
   "Residential Solar",
@@ -13,9 +14,12 @@ const services = [
 ];
 
 export function BrandPromiseSection() {
+  const { ref, inView } = useInView();
+
   return (
     <section style={{ background: "#ffffff", padding: "100px 0" }}>
       <div
+        ref={ref}
         className="brand-promise-grid"
         style={{
           maxWidth: 1200,
@@ -27,7 +31,7 @@ export function BrandPromiseSection() {
           alignItems: "center",
         }}
       >
-        <div>
+        <div style={fadeUp(inView)}>
           <h2
             style={{
               fontSize: "clamp(32px, 3.5vw, 50px)",
@@ -84,6 +88,7 @@ export function BrandPromiseSection() {
           style={{
             overflow: "hidden",
             borderRadius: 20,
+            ...fadeUp(inView, 0.15),
             padding: "40px 0",
             display: "flex",
             flexDirection: "column",

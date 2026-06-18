@@ -1,3 +1,7 @@
+"use client";
+
+import { useInView, fadeUp } from "@/hooks/useInView";
+
 const articles = [
   {
     tags: ["Education"],
@@ -26,9 +30,11 @@ const articles = [
 ];
 
 export function LatestNews() {
+  const { ref, inView } = useInView();
+
   return (
     <section style={{ background: "#ffffff", padding: "80px 0" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px" }}>
+      <div ref={ref} style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px" }}>
         <h2
           style={{
             fontSize: "clamp(36px, 3.5vw, 48px)",
@@ -36,6 +42,7 @@ export function LatestNews() {
             letterSpacing: "-0.02em",
             textAlign: "center",
             marginBottom: 48,
+            ...fadeUp(inView),
           }}
         >
           <span style={{ color: "#1f1e1e" }}>Solar </span>
@@ -61,6 +68,7 @@ export function LatestNews() {
                 padding: 24,
                 display: "flex",
                 flexDirection: "column",
+                ...fadeUp(inView, 0.1 + i * 0.1),
               }}
             >
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>

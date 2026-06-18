@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useInView, fadeUp } from "@/hooks/useInView";
 
 const slides = [
   {
@@ -67,6 +68,7 @@ const CARD_GAP = 24;
 
 export function ItemsSlider() {
   const [offset, setOffset] = useState(0);
+  const { ref, inView } = useInView();
   const maxOffset = (slides.length - 3) * (CARD_WIDTH + CARD_GAP);
 
   const prev = () =>
@@ -76,7 +78,7 @@ export function ItemsSlider() {
 
   return (
     <section style={{ background: "#eee8e2", padding: "80px 0" }}>
-      <div style={{ maxWidth: 1440, margin: "0 auto", padding: "0 80px" }}>
+      <div ref={ref} style={{ maxWidth: 1440, margin: "0 auto", padding: "0 80px" }}>
         <h2
           style={{
             fontSize: "clamp(36px, 3.5vw, 48px)",
@@ -84,6 +86,7 @@ export function ItemsSlider() {
             letterSpacing: "-0.02em",
             textAlign: "center",
             marginBottom: 48,
+            ...fadeUp(inView),
           }}
         >
           <span style={{ color: "#1f1e1e" }}>Our </span>
@@ -112,6 +115,7 @@ export function ItemsSlider() {
                     cursor: "pointer",
                     display: "flex",
                     flexDirection: "column",
+                    ...fadeUp(inView, i * 0.06),
                   }}
                 >
                   <div style={{ position: "relative", height: 300 }}>

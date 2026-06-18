@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useInView, fadeUp } from "@/hooks/useInView";
 
 const testimonials = [
   {
@@ -35,6 +36,7 @@ const CARD_GAP = 24;
 
 export function ProjectsSlider() {
   const [offset, setOffset] = useState(0);
+  const { ref, inView } = useInView();
   const maxOffset = (testimonials.length - 3) * (CARD_WIDTH + CARD_GAP);
 
   const prev = () => setOffset((o) => Math.max(0, o - (CARD_WIDTH + CARD_GAP)));
@@ -42,7 +44,7 @@ export function ProjectsSlider() {
 
   return (
     <section style={{ background: "#eee8e2", padding: "80px 0" }}>
-      <div style={{ maxWidth: 1440, margin: "0 auto", padding: "0 80px" }}>
+      <div ref={ref} style={{ maxWidth: 1440, margin: "0 auto", padding: "0 80px" }}>
         {/* Header row */}
         <div
           style={{
@@ -50,6 +52,7 @@ export function ProjectsSlider() {
             justifyContent: "space-between",
             alignItems: "flex-start",
             marginBottom: 40,
+            ...fadeUp(inView),
           }}
         >
           <div>

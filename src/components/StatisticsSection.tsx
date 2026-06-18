@@ -1,15 +1,41 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useInView, fadeUp } from "@/hooks/useInView";
 
-const stats = [
-  { number: "15+", label: "Years of solar experience" },
-  { number: "100+", label: "Solar PV systems installed" },
-  { number: "200+", label: "Solar professionals trained" },
-  { number: "100%", label: "5-star customer satisfaction" },
-];
+function useCountUp(target: number, duration: number, active: boolean) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    const startTime = performance.now();
+    function tick(now: number) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }, [active, target, duration]);
+  return value;
+}
 
-function StatBox({ number, label }: { number: string; label: string }) {
+function StatBox({
+  number,
+  label,
+  inView,
+  delay,
+}: {
+  number: string;
+  label: string;
+  inView: boolean;
+  delay: number;
+}) {
+  const match = number.match(/^(\d+)(.*)$/);
+  const target = match ? parseInt(match[1]) : 0;
+  const suffix = match ? match[2] : "";
+  const count = useCountUp(target, 1800, inView);
+
   return (
     <div
       style={{
@@ -21,6 +47,7 @@ function StatBox({ number, label }: { number: string; label: string }) {
         flexDirection: "column",
         alignItems: "center",
         gap: 12,
+        ...fadeUp(inView, delay),
       }}
     >
       <span
@@ -32,7 +59,7 @@ function StatBox({ number, label }: { number: string; label: string }) {
           lineHeight: 1,
         }}
       >
-        {number}
+        {inView ? count + suffix : "0" + suffix}
       </span>
       <span
         style={{
@@ -48,10 +75,20 @@ function StatBox({ number, label }: { number: string; label: string }) {
   );
 }
 
+const stats = [
+  { number: "15+", label: "Years of solar experience" },
+  { number: "100+", label: "Solar PV systems installed" },
+  { number: "200+", label: "Solar professionals trained" },
+  { number: "100%", label: "5-star customer satisfaction" },
+];
+
 export function StatisticsSection() {
+  const { ref, inView } = useInView();
+
   return (
     <section style={{ background: "#ffffff", padding: "80px 0" }}>
       <div
+        ref={ref}
         className="stats-outer-grid"
         style={{
           maxWidth: 1200,
@@ -75,6 +112,7 @@ export function StatisticsSection() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+            ...fadeUp(inView),
           }}
         >
           <h2
@@ -141,11 +179,13 @@ export function StatisticsSection() {
             height: "100%",
           }}
         >
-          {stats.map((s) => (
+          {stats.map((s, i) => (
             <StatBox
               key={s.number}
               number={s.number}
               label={s.label}
+              inView={inView}
+              delay={0.1 + i * 0.08}
             />
           ))}
         </div>

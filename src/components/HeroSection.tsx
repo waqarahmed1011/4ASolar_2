@@ -1,8 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export function HeroSection() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 80);
+    return () => clearTimeout(t);
+  }, []);
+
+  const fly = (delay: number): React.CSSProperties => ({
+    opacity: mounted ? 1 : 0,
+    transform: mounted ? "translateY(0)" : "translateY(22px)",
+    transition: `opacity 0.75s ease ${delay}s, transform 0.75s ease ${delay}s`,
+  });
+
   return (
     <section
       style={{
@@ -41,6 +54,7 @@ export function HeroSection() {
             maxWidth: "900px",
             margin: "0 auto",
             whiteSpace: "pre-line",
+            ...fly(0.1),
           }}
         >
           {"Keep It Simple."}
@@ -64,6 +78,7 @@ export function HeroSection() {
             gap: "16px",
             justifyContent: "center",
             flexWrap: "wrap",
+            ...fly(0.35),
           }}
         >
           <Link

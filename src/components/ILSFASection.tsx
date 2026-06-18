@@ -1,9 +1,14 @@
 "use client";
 
+import { useInView, fadeUp } from "@/hooks/useInView";
+
 export function ILSFASection() {
+  const { ref, inView } = useInView();
+
   return (
     <section style={{ background: "#eee8e2", padding: "80px 0" }}>
       <div
+        ref={ref}
         className="ilsfa-grid"
         style={{
           maxWidth: 1200,
@@ -15,7 +20,7 @@ export function ILSFASection() {
           alignItems: "center",
         }}
       >
-        <div>
+        <div style={fadeUp(inView)}>
           <p
             style={{
               fontSize: 12,
@@ -68,6 +73,7 @@ export function ILSFASection() {
             flexDirection: "column",
             gap: 24,
             alignItems: "flex-start",
+            ...fadeUp(inView, 0.15),
           }}
         >
           <a

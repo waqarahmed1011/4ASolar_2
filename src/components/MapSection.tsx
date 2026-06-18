@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useInView, fadeUp } from "@/hooks/useInView";
 
 const tabs = ["Morton Grove (HQ)", "Skokie · Evanston · Niles", "Glenview · Park Ridge", "Schaumburg & beyond"] as const;
 type Tab = (typeof tabs)[number];
 
 export function MapSection() {
   const [activeTab, setActiveTab] = useState<Tab>("Morton Grove (HQ)");
+  const { ref, inView } = useInView();
 
   return (
     <section style={{ background: "#eee8e2", padding: "80px 0" }}>
       <div
+        ref={ref}
         className="map-section-grid"
         style={{
           maxWidth: 1200,
@@ -22,7 +25,7 @@ export function MapSection() {
           alignItems: "center",
         }}
       >
-        <div>
+        <div style={fadeUp(inView)}>
           <h2
             style={{
               fontSize: "clamp(36px, 3.84vw, 55px)",
@@ -72,7 +75,7 @@ export function MapSection() {
           </a>
         </div>
 
-        <div>
+        <div style={fadeUp(inView, 0.15)}>
           <div
             style={{
               position: "relative",
