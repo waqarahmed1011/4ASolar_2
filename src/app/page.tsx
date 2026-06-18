@@ -1,9 +1,33 @@
-export default function Home() {
+import { SiteHeader } from "@/components/SiteHeader";
+import { HeroSection } from "@/components/HeroSection";
+import { NABCEPBar } from "@/components/NABCEPBar";
+import { ContactSection } from "@/components/ContactSection";
+import { ItemsSlider } from "@/components/ItemsSlider";
+import { StatisticsSection } from "@/components/StatisticsSection";
+import { ILSFASection } from "@/components/ILSFASection";
+import { BrandPromiseSection } from "@/components/BrandPromiseSection";
+import { MapSection } from "@/components/MapSection";
+import { HighlighterServices } from "@/components/HighlighterServices";
+import { ProjectsSlider } from "@/components/ProjectsSlider";
+import { LatestNews } from "@/components/LatestNews";
+import { SiteFooter } from "@/components/SiteFooter";
+
+export default function HomePage() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <p className="text-muted-foreground">
-        Clone target not yet built. Run <code className="font-mono text-foreground">/clone-website</code> to start.
-      </p>
+    <main>
+      <SiteHeader />
+      <HeroSection />
+      <NABCEPBar />
+      <ContactSection />
+      <ItemsSlider />
+      <StatisticsSection />
+      <ILSFASection />
+      <BrandPromiseSection />
+      <MapSection />
+      <HighlighterServices />
+      <ProjectsSlider />
+      <LatestNews />
+      <SiteFooter />
     </main>
   );
 }
