@@ -1,56 +1,64 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 const slides = [
   {
-    icon: "/icons/wind.svg",
-    image: "/images/expertise-wind.jpg",
-    titleDark: "Community-centered ",
-    titleMuted: "wind",
-    titleRest: " energy development.",
-    desc: "We finance, develop and operate onshore wind energy projects, centred around community interests and environmental stewardship.",
-  },
-  {
     icon: "/icons/solar.svg",
-    image: "/images/expertise-wind-2.jpg",
-    titleDark: "Large and medium scale ",
+    image: "/images/solar-residential.jpg",
+    titleDark: "Residential ",
     titleMuted: "solar",
-    titleRest: " and agrovoltaic solutions.",
-    desc: "Our industrial-scale solar projects and innovative agrovoltaic solutions are seamlessly integrated with local grid systems.",
-  },
-  {
-    icon: "/icons/hydrogen.svg",
-    image: "/images/expertise-hydrogen.jpg",
-    titleDark: "Pioneering of renewable ",
-    titleMuted: "hydrogen",
-    titleRest: " production.",
-    desc: "We lead in RFNBO hydrogen development, adding an essential component to the zero-emission energy landscape.",
+    titleRest: " design and installation.",
+    desc: "Custom-sized systems for Illinois homeowners. Every design is based on your actual usage and roof conditions — no oversizing, no upselling.",
   },
   {
     icon: "/icons/solar.svg",
-    image: "/images/virya-image-6.jpg",
-    titleDark: "Enabling the transition ",
-    titleMuted: "for everyone",
-    titleRest: ".",
-    desc: "Through our DATS 24 brand, we provide a network of fueling stations, green energy contracts for homes and EV charging parks.",
+    image: "/images/solar-commercial.jpg",
+    titleDark: "Commercial ",
+    titleMuted: "solar",
+    titleRest: " for businesses of all sizes.",
+    desc: "We design and install commercial solar systems that reduce operating costs and qualify for federal and state tax incentives.",
   },
   {
-    icon: "/icons/monitoring.svg",
-    image: "/images/virya-image-8.jpg",
-    titleDark: "Comprehensive energy infrastructure ",
-    titleMuted: "monitoring",
-    titleRest: ".",
-    desc: "Our infrastructure monitoring services ensure optimal performance of energy installations on land and offshore.",
+    icon: "/icons/solar.svg",
+    image: "/images/solar-nonprofit.jpg",
+    titleDark: "Solar for ",
+    titleMuted: "non-profits",
+    titleRest: " — mission-aligned energy.",
+    desc: "Non-profit organizations qualify for special incentive pathways. We help you navigate grant eligibility and maximize savings.",
   },
   {
-    icon: "/icons/transition.svg",
-    image: "/images/virya-image-27.jpg",
-    titleDark: "Tailor made, ",
-    titleMuted: "fit for purpose",
-    titleRest: " B2B sustainable energy solutions.",
-    desc: "We guide our B2B clients in their energy transition, with customized solutions that meet their specific energy needs.",
+    icon: "/icons/solar.svg",
+    image: "/images/solar-battery.jpg",
+    titleDark: "Battery ",
+    titleMuted: "storage",
+    titleRest: " systems for energy independence.",
+    desc: "Pair your solar system with battery backup to keep the lights on during outages and maximize your self-consumption.",
+  },
+  {
+    icon: "/icons/solar.svg",
+    image: "/images/solar-ev.jpg",
+    titleDark: "EV charger ",
+    titleMuted: "installation",
+    titleRest: " for home and business.",
+    desc: "We install Level 2 EV chargers alongside your solar system, letting you charge your vehicle on clean Illinois solar energy.",
+  },
+  {
+    icon: "/icons/solar.svg",
+    image: "/images/solar-repairs.jpg",
+    titleDark: "Service and ",
+    titleMuted: "repairs",
+    titleRest: " for existing solar systems.",
+    desc: "We diagnose and repair solar systems of any brand. Annual inspections available to keep your system producing at peak output.",
+  },
+  {
+    icon: "/icons/solar.svg",
+    image: "/images/solar-incentives.jpg",
+    titleDark: "Solar incentives ",
+    titleMuted: "consulting",
+    titleRest: " — Illinois and federal.",
+    desc: "We walk you through the Federal ITC, Illinois Shines SRECs, ComEd rebates, and net metering so you know exactly what you'll save.",
   },
 ];
 
@@ -79,7 +87,7 @@ export function ItemsSlider() {
           }}
         >
           <span style={{ color: "#1f1e1e" }}>Our </span>
-          <span style={{ color: "#9f908d" }}>expertise</span>
+          <span style={{ color: "#9f908d" }}>services</span>
         </h2>
 
         <div style={{ position: "relative" }}>
@@ -114,29 +122,6 @@ export function ItemsSlider() {
                       style={{ objectFit: "cover" }}
                       sizes="416px"
                     />
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 20,
-                        left: 20,
-                        width: 48,
-                        height: 48,
-                        background: "rgba(255,255,255,0.9)",
-                        borderRadius: 12,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={slide.icon}
-                        alt=""
-                        width={28}
-                        height={28}
-                        style={{ objectFit: "contain" }}
-                      />
-                    </div>
                   </div>
                   <div style={{ padding: 24 }}>
                     <p

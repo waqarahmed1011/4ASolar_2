@@ -1,50 +1,43 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const panels = [
   {
-    word: "Landowners",
-    desc: 'For Virya Energy, the energy transition must be adapted to each reality. Our "fit for purpose" approach reflects our commitment to developing customized solutions that exactly meet everyone\'s needs.',
+    word: "Homeowners",
+    desc: "Going solar at home should be straightforward. Sam sizes your system based on your actual utility bills and roof conditions — no oversizing, no pressure, and a full walkthrough of every incentive available to you.",
     image: "/images/highlighter-landowners.jpg",
+    href: "/residential",
     tags: [
-      "Space Monetization",
-      "Predictable Income",
-      "Carbon Footprint Reduction",
-      "Energy Independence",
+      "Reduce Your Electric Bill",
+      "Illinois Incentives",
+      "Increase Home Value",
+      "Battery Backup",
     ],
   },
   {
-    word: "Manufacturing",
-    desc: "By simplifying access to renewable energy, we are building a path towards a sustainable future for manufacturing businesses.",
+    word: "Businesses",
+    desc: "Commercial solar reduces your operating costs, qualifies for the federal Investment Tax Credit, and signals sustainability to your customers. We handle the entire project from engineering to interconnection.",
     image: "/images/virya-image-8.jpg",
+    href: "/commercial",
     tags: [
-      "Energy Cost Reduction",
-      "Regulatory Compliance",
-      "Energy Resilience",
+      "Lower Operating Costs",
+      "Federal Tax Credit",
+      "Scalable Systems",
       "Energy Independence",
     ],
   },
   {
-    word: "Logistics",
-    desc: "We provide tailor-made energy solutions for logistics and transport companies, helping them reduce emissions and energy costs.",
+    word: "Non-Profits",
+    desc: "Non-profit organizations have unique access to Illinois solar incentives and grant pathways that for-profit entities can't use. We help you structure the project to maximize every available dollar.",
     image: "/images/virya-image-27.jpg",
+    href: "/non-profits",
     tags: [
-      "Fleet Electrification",
-      "Clean Transport",
-      "Carbon Reduction",
-      "Cost Savings",
-    ],
-  },
-  {
-    word: "Retail",
-    desc: "Our retail energy solutions help businesses achieve sustainability goals while reducing operational costs through renewable energy.",
-    image: "/images/virya-image-31.jpg",
-    tags: [
-      "Green Energy",
-      "Cost Reduction",
-      "ESG Compliance",
-      "Sustainability",
+      "Mission-Aligned Energy",
+      "Grant Eligible",
+      "Community Impact",
+      "Illinois Shines",
     ],
   },
 ] as const;
@@ -124,13 +117,11 @@ export function HighlighterServices() {
               marginBottom: 24,
             }}
           >
-            Discover our{" "}
+            Solar solutions for{" "}
             <span style={{ color: "#FF5938" }}>{displayedWord}</span>
             <span style={{ opacity: showCursor ? 1 : 0, color: "#FF5938" }}>
               |
             </span>
-            <br />
-            solutions
           </h2>
 
           <p
@@ -145,7 +136,8 @@ export function HighlighterServices() {
             {currentPanel.desc}
           </p>
 
-          <button
+          <Link
+            href={currentPanel.href}
             style={{
               background: "transparent",
               color: "#1f1e1e",
@@ -154,17 +146,19 @@ export function HighlighterServices() {
               padding: "12px 28px",
               fontSize: 15,
               cursor: "pointer",
+              textDecoration: "none",
+              display: "inline-block",
               transition: "border-color 0.2s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(31,30,30,0.6)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(31,30,30,0.6)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(31,30,30,0.25)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(31,30,30,0.25)";
             }}
           >
             Learn more
-          </button>
+          </Link>
         </div>
 
         <div className="flex justify-center highlighter-right">

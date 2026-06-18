@@ -6,25 +6,30 @@ import Link from "next/link";
 import { MenuIcon, CloseIcon } from "@/components/icons";
 
 const NAV_LINKS = [
-  { label: "Our expertise", href: "#" },
-  { label: "Your activity", href: "#" },
-  { label: "About Us", href: "#" },
-  { label: "Resources", href: "#" },
-  { label: "News", href: "#" },
-  { label: "Cooperatives", href: "#" },
-  { label: "Careers", href: "#" },
-  { label: "Projects", href: "#" },
+  { label: "Residential", href: "/residential" },
+  { label: "Commercial", href: "/commercial" },
+  { label: "Non-Profits", href: "/non-profits" },
+  { label: "Batteries", href: "/batteries" },
+  { label: "EV Chargers", href: "/ev-chargers" },
+  { label: "Service & Repairs", href: "/service-repairs" },
+  { label: "Solar Incentives", href: "/solar-incentives" },
+  { label: "About Us", href: "/about" },
 ];
 
-export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
+interface SiteHeaderProps {
+  alwaysScrolled?: boolean;
+}
+
+export function SiteHeader({ alwaysScrolled = false }: SiteHeaderProps) {
+  const [scrolled, setScrolled] = useState(alwaysScrolled);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
+    if (alwaysScrolled) return;
     const onScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [alwaysScrolled]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -47,7 +52,7 @@ export function SiteHeader() {
           width: "100%",
           zIndex: 1000,
           transition: "all 0.3s ease",
-          padding: "32px 0",
+          padding: "24px 0",
           ...(scrolled
             ? {
                 background: "rgba(254,254,254,0.97)",
@@ -63,21 +68,22 @@ export function SiteHeader() {
         <div className="virya-wrapper flex items-center justify-between">
           <Link href="/" className="shrink-0">
             <Image
-              src="/images/virya-logo.png"
-              width={100}
-              height={49}
-              alt="Virya Energy"
+              src="/images/4asolar-logo.png"
+              width={120}
+              height={52}
+              alt="4A Solar"
               priority
+              style={{ display: "block", filter: scrolled ? "none" : "drop-shadow(0 1px 3px rgba(0,0,0,0.6))" }}
             />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 style={{
-                  fontSize: "16px",
+                  fontSize: "15px",
                   textDecoration: "none",
                   color: scrolled ? "#1f1e1e" : "#ffffff",
                   transition: "color 0.3s ease",
@@ -85,13 +91,17 @@ export function SiteHeader() {
                 }}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          <div className="hidden lg:block shrink-0">
-            <a href="#" className="virya-btn-primary">
-              Build with us →
+          <div className="hidden lg:flex items-center gap-4 shrink-0">
+            <a
+              href="tel:773-502-1529"
+              className="virya-btn-primary"
+              style={{ padding: "10px 20px", fontSize: 14, whiteSpace: "nowrap" }}
+            >
+              773-502-1529
             </a>
           </div>
 
@@ -121,11 +131,11 @@ export function SiteHeader() {
           <div className="flex items-center justify-between mb-12">
             <Link href="/" onClick={() => setMobileOpen(false)}>
               <Image
-                src="/images/virya-logo.png"
-                width={80}
-                height={39}
-                alt="Virya Energy"
-                style={{ filter: "brightness(0) invert(1)" }}
+                src="/images/4asolar-logo.png"
+                width={100}
+                height={44}
+                alt="4A Solar"
+                style={{ display: "block" }}
               />
             </Link>
             <button
@@ -140,7 +150,7 @@ export function SiteHeader() {
 
           <nav className="flex flex-col gap-6 flex-1">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
@@ -153,13 +163,18 @@ export function SiteHeader() {
                 }}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          <div className="mt-auto pt-8">
-            <a href="#" className="virya-btn-primary">
-              Build with us →
+          <div className="mt-auto pt-8 flex flex-col gap-4">
+            <a
+              href="tel:773-502-1529"
+              className="virya-btn-primary"
+              onClick={() => setMobileOpen(false)}
+              style={{ textAlign: "center" }}
+            >
+              773-502-1529
             </a>
           </div>
         </div>

@@ -1,27 +1,53 @@
 import Image from "next/image";
-import { LinkedInIcon } from "@/components/icons";
+import { LinkedInIcon, YouTubeIcon, InstagramIcon } from "@/components/icons";
 
 const col1 = {
-  header: "Our expertise",
-  links: ["Wind Energy", "Solar Energy", "Hydrogen development", "Energy supply", "Service companies"],
+  header: "Our Services",
+  links: [
+    { label: "Residential Solar", href: "/residential" },
+    { label: "Commercial Solar", href: "/commercial" },
+    { label: "Solar for Non-Profits", href: "/non-profits" },
+    { label: "Battery Storage", href: "/batteries" },
+    { label: "EV Chargers", href: "/ev-chargers" },
+    { label: "Service & Repairs", href: "/service-repairs" },
+    { label: "Solar Incentives", href: "/solar-incentives" },
+  ],
 };
+
 const col2 = {
-  header: "Your Activity",
-  links: ["Local Communities", "Logistics Service Providers", "Manufacturing operations", "Retail Businesses", "Solutions for landowners"],
+  header: "Who We Serve",
+  links: [
+    { label: "Homeowners", href: "/residential" },
+    { label: "Businesses", href: "/commercial" },
+    { label: "Non-Profits", href: "/non-profits" },
+  ],
 };
+
 const col3 = {
   header: null,
-  links: ["About Us", "Resources", "News", "Cooperatives", "Careers"],
+  links: [
+    { label: "About Us", href: "/about" },
+    { label: "Solar Resources", href: "/resources" },
+    { label: "Contact Us", href: "#contact" },
+    { label: "Service Area", href: "#service-area" },
+    { label: "Illinois Solar Incentives", href: "/solar-incentives" },
+  ],
 };
+
+const socialLinks = [
+  { icon: LinkedInIcon, href: "https://www.linkedin.com", label: "LinkedIn" },
+  { icon: YouTubeIcon, href: "https://www.youtube.com", label: "YouTube" },
+  { icon: InstagramIcon, href: "https://www.instagram.com", label: "Instagram" },
+];
 
 export function SiteFooter() {
   return (
-    <footer style={{ background: "#0F4338" }}>
+    <footer style={{ background: "#08426E" }}>
       {/* Pre-footer CTA card */}
       <div style={{ padding: "60px 80px 0" }}>
         <div
           style={{
-            background: "#185649",
+            background: "#0f6499",
             borderRadius: 24,
             padding: "60px 80px",
             position: "relative",
@@ -43,13 +69,13 @@ export function SiteFooter() {
               maxWidth: 700,
             }}
           >
-            Start your{" "}
-            <span style={{ color: "#FF5938" }}>energy transition</span>
+            Start saving with{" "}
+            <span style={{ color: "#FF5938" }}>solar energy</span>
             {" "}today.
           </h2>
 
           <a
-            href="#"
+            href="#contact"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -64,7 +90,7 @@ export function SiteFooter() {
               width: "fit-content",
             }}
           >
-            Get started →
+            Get a Free Quote →
           </a>
 
           <div
@@ -84,14 +110,36 @@ export function SiteFooter() {
       {/* Footer content */}
       <div style={{ padding: "60px 80px 40px", maxWidth: 1440, margin: "0 auto" }}>
         {/* Logo */}
-        <div style={{ marginBottom: 48 }}>
+        <div style={{ marginBottom: 24 }}>
           <Image
-            src="/images/virya-logo.png"
-            width={100}
-            height={49}
-            alt="Virya Energy"
+            src="/images/4asolar-logo.png"
+            width={120}
+            height={52}
+            alt="4A Solar"
             style={{ filter: "brightness(0) invert(1)" }}
           />
+        </div>
+
+        {/* Contact info row */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "8px 24px",
+            marginBottom: 48,
+            fontSize: 13,
+            color: "rgba(255,255,255,0.5)",
+          }}
+        >
+          <a href="https://maps.google.com/?q=5912+Crain+St,+Morton+Grove,+IL+60053" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
+            5912 Crain St, Morton Grove, Illinois 60053
+          </a>
+          <span>·</span>
+          <a href="mailto:contact@4asolar.com" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>contact@4asolar.com</a>
+          <span>·</span>
+          <a href="tel:773-502-1529" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>773-502-1529</a>
+          <span>·</span>
+          <span>Lic. #24-35956</span>
         </div>
 
         {/* Nav columns */}
@@ -121,8 +169,8 @@ export function SiteFooter() {
               )}
               {col.links.map((link) => (
                 <a
-                  key={link}
-                  href="#"
+                  key={link.label}
+                  href={link.href}
                   style={{
                     fontSize: 15,
                     color: "rgba(255,255,255,0.75)",
@@ -131,7 +179,7 @@ export function SiteFooter() {
                     marginBottom: 10,
                   }}
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </div>
@@ -150,9 +198,20 @@ export function SiteFooter() {
             >
               Follow us
             </p>
-            <a href="#" style={{ color: "rgba(255,255,255,0.7)", display: "inline-block" }}>
-              <LinkedInIcon width={24} height={24} />
-            </a>
+            <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  style={{ color: "rgba(255,255,255,0.7)", display: "inline-flex" }}
+                >
+                  <Icon width={24} height={24} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -170,8 +229,7 @@ export function SiteFooter() {
             gap: 8,
           }}
         >
-          <span>Copyright © 2026</span>
-          <span>Virya Energy</span>
+          <span>Copyright © 2026 JBW Tech Co</span>
           <span>Privacy Policy · Cookie Policy</span>
         </div>
       </div>

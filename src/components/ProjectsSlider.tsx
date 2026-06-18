@@ -1,15 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { WindIcon, SolarCircleIcon } from "@/components/icons";
 
-const projects = [
-  { category: "Wind", name: "Ollignies North", image: "/images/expertise-wind.jpg" },
-  { category: "Solar", name: "Groupe Bonnin", image: "/images/expertise-wind-2.jpg" },
-  { category: "Solar", name: "HQ DRSD Malakoff", image: "/images/virya-image-6.jpg" },
-  { category: "Solar", name: "Fresenius Kabi", image: "/images/virya-image-8.jpg" },
-  { category: "Solar", name: "Agence Léon Grosse Aix-les Bains", image: "/images/virya-image-27.jpg" },
-  { category: "Wind", name: "Parc de Lislet 2", image: "/images/virya-image-31.jpg" },
+const testimonials = [
+  {
+    quote: "From the survey and planning to the finished product, Sam executed the entire installation with thorough professionalism. He had excellent knowledge of the system and provided multiple alternatives that would work well with our house. Finished exactly on time, no surprises whatsoever. I would recommend anyone interested in solar to hire Sam.",
+    name: "Henry Chang",
+    title: "Homeowner",
+  },
+  {
+    quote: "Sam installed a complicated off-grid solar system for our two new homes. Because of his analysis and understanding of our needs, we are now enjoying free electricity. His hard work and creativity were unlike anything we had seen. An awesome experience we will never forget.",
+    name: "Victoria Srour",
+    title: "Homeowner",
+  },
+  {
+    quote: "Sam managed the installation of a solar system for my home. He got it done quickly and cleanly. There were no problems with the installation or the system. Sam was easy to talk to and incredibly responsive to every question I asked. First-class service from start to finish.",
+    name: "Jim Knoke",
+    title: "Senior Engineer",
+  },
+  {
+    quote: "We purchased a solar system from Sam and could not be happier. He was very knowledgeable and helped us understand every step of the process. He stayed in contact after installation to make sure everything ran perfectly. His engineering background made all the difference.",
+    name: "Cindy Forcier",
+    title: "Product Manager",
+  },
+  {
+    quote: "Sam has installed over 100 solar systems since 2011. His company received five-star reviews from every customer on Yelp. Everyone who works with him remarks on how knowledgeable he is and how his team always goes above and beyond to make sure every customer is completely satisfied, through the installation and long after.",
+    name: "Mike Neville",
+    title: "Solar Industry Professional",
+  },
 ] as const;
 
 const CARD_WIDTH = 380;
@@ -17,7 +35,7 @@ const CARD_GAP = 24;
 
 export function ProjectsSlider() {
   const [offset, setOffset] = useState(0);
-  const maxOffset = (projects.length - 3) * (CARD_WIDTH + CARD_GAP);
+  const maxOffset = (testimonials.length - 3) * (CARD_WIDTH + CARD_GAP);
 
   const prev = () => setOffset((o) => Math.max(0, o - (CARD_WIDTH + CARD_GAP)));
   const next = () => setOffset((o) => Math.min(maxOffset, o + (CARD_WIDTH + CARD_GAP)));
@@ -30,20 +48,40 @@ export function ProjectsSlider() {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
+            alignItems: "flex-start",
             marginBottom: 40,
           }}
         >
-          <h2
-            style={{
-              fontSize: "clamp(36px, 3.5vw, 48px)",
-              fontWeight: 400,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            <span style={{ color: "#1f1e1e" }}>Our </span>
-            <span style={{ color: "#9f908d" }}>projects</span>
-          </h2>
+          <div>
+            <h2
+              style={{
+                fontSize: "clamp(36px, 3.5vw, 48px)",
+                fontWeight: 400,
+                letterSpacing: "-0.02em",
+                marginBottom: 12,
+              }}
+            >
+              <span style={{ color: "#1f1e1e" }}>What our </span>
+              <span style={{ color: "#9f908d" }}>clients say</span>
+            </h2>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1f1e1e",
+                color: "#ffffff",
+                borderRadius: 999,
+                padding: "8px 18px",
+                fontSize: 13,
+                fontWeight: 400,
+                letterSpacing: "0.01em",
+              }}
+            >
+              <span style={{ color: "#FF5938", fontSize: 16 }}>★★★★★</span>
+              {" "}100% Five-Star Customer Satisfaction Rating
+            </span>
+          </div>
           <button
             style={{
               background: "transparent",
@@ -54,9 +92,10 @@ export function ProjectsSlider() {
               fontSize: 14,
               cursor: "pointer",
               whiteSpace: "nowrap",
+              marginTop: 8,
             }}
           >
-            Discover our projects
+            See all reviews
           </button>
         </div>
 
@@ -71,7 +110,7 @@ export function ProjectsSlider() {
                 transition: "transform 0.4s ease",
               }}
             >
-              {projects.map((project, i) => (
+              {testimonials.map((t, i) => (
                 <div
                   key={i}
                   style={{
@@ -81,61 +120,68 @@ export function ProjectsSlider() {
                     borderRadius: 20,
                     overflow: "hidden",
                     position: "relative",
-                    cursor: "pointer",
+                    background: "#1f1e1e",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    padding: 40,
                   }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  />
-
-                  {/* Gradient overlay */}
-                  <div
+                  {/* Opening quote mark */}
+                  <span
                     style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      height: "50%",
-                      background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)",
-                    }}
-                  />
-
-                  {/* Category label */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 56,
-                      left: 24,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
-                      fontSize: 14,
-                      color: "rgba(255,255,255,0.85)",
-                    }}
-                  >
-                    {project.category === "Wind" ? (
-                      <WindIcon width={16} height={16} />
-                    ) : (
-                      <SolarCircleIcon width={16} height={16} />
-                    )}
-                    {project.category}
-                  </div>
-
-                  {/* Project name */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 24,
-                      left: 24,
-                      fontSize: 22,
+                      fontSize: 80,
+                      lineHeight: 1,
+                      color: "#FF5938",
                       fontWeight: 400,
-                      color: "#ffffff",
+                      display: "block",
+                      marginBottom: 8,
                     }}
                   >
-                    {project.name}
+                    &ldquo;
+                  </span>
+
+                  {/* Quote text */}
+                  <p
+                    style={{
+                      fontSize: 16,
+                      color: "rgba(255,255,255,0.85)",
+                      lineHeight: 1.6,
+                      flex: 1,
+                      marginTop: -20,
+                    }}
+                  >
+                    {t.quote}
+                  </p>
+
+                  {/* Attribution */}
+                  <div style={{ marginTop: 32 }}>
+                    <div
+                      style={{
+                        width: 40,
+                        height: 1,
+                        background: "#FF5938",
+                        marginBottom: 16,
+                      }}
+                    />
+                    <div
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 400,
+                        color: "#ffffff",
+                      }}
+                    >
+                      {t.name}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 14,
+                        color: "rgba(255,255,255,0.5)",
+                        marginTop: 4,
+                      }}
+                    >
+                      {t.title}
+                    </div>
                   </div>
                 </div>
               ))}

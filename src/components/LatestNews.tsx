@@ -1,24 +1,27 @@
 const articles = [
   {
-    tags: ["Solar", "General news"],
-    title: "Virya Energy and EBRD Partner to Accelerate Renewable Energy Expansion in Poland",
-    date: "Braine L'Alleud, 26/02/2026",
+    tags: ["Education"],
+    title: "How Does Solar Energy Work? A Plain-English Explanation",
+    date: "Morton Grove, IL",
     excerpt:
-      "Virya Energy NV is pleased to announce the acceleration of its renewable energy expansion in Poland, through a strategic partnership with the European Bank for Reconstruction and Development (EBRD).",
+      "Solar panels convert sunlight directly into electricity through photovoltaic cells. That electricity flows through an inverter, powers your home, and any surplus gets sent back to the grid — earning you a credit on your ComEd bill through net metering.",
+    href: "/resources/how-solar-works",
   },
   {
-    tags: ["General news", "Solar"],
-    title: "Virya Energy Expands into Japan's Renewable Market through Integration of BayWa r.e.'s Japan Solar Platform",
-    date: "Tokyo, Japan, 12/12/2025",
+    tags: ["Guide"],
+    title: "Your Step-by-Step Guide to Going Solar in Illinois",
+    date: "Morton Grove, IL",
     excerpt:
-      "Virya Energy, a pioneer in renewable energy development, announces its expansion into Japan through the strategic integration of BayWa r.e.'s Japan Solar Platform.",
+      "Going solar in Illinois involves four main steps: a site assessment, system design, permits and interconnection, and installation. We walk every customer through each stage — here's what to expect from your first call to flip-the-switch day.",
+    href: "/resources/guide-to-going-solar",
   },
   {
-    tags: ["General news"],
-    title: "Demonstration of hydrogen in heavy-duty transport at Spa-Francorchamps",
-    date: "Braine L'Alleud, 2025",
+    tags: ["Education"],
+    title: "Understanding Net Metering: How Solar Credits Work in Illinois",
+    date: "Morton Grove, IL",
     excerpt:
-      "At the iconic Spa-Francorchamps circuit, Belgium signalled its ambition to lead Europe's hydrogen transport revolution.",
+      "Net metering allows your solar system to send excess electricity back to the ComEd grid in exchange for bill credits. When your panels produce more than you use, the meter runs backward — and those credits offset the electricity you draw at night or on cloudy days.",
+    href: "/resources/net-metering",
   },
 ];
 
@@ -35,8 +38,8 @@ export function LatestNews() {
             marginBottom: 48,
           }}
         >
-          <span style={{ color: "#1f1e1e" }}>Latest </span>
-          <span style={{ color: "#9f908d" }}>news</span>
+          <span style={{ color: "#1f1e1e" }}>Solar </span>
+          <span style={{ color: "#9f908d" }}>resources</span>
         </h2>
 
         <div
@@ -90,17 +93,6 @@ export function LatestNews() {
                 {article.title}
               </h3>
 
-              <time
-                style={{
-                  fontSize: 12,
-                  color: "#9f908d",
-                  display: "block",
-                  marginBottom: 8,
-                }}
-              >
-                {article.date}
-              </time>
-
               <p
                 style={{
                   fontSize: 14,
@@ -113,7 +105,7 @@ export function LatestNews() {
               </p>
 
               <a
-                href="#"
+                href={article.href}
                 style={{
                   fontSize: 14,
                   color: "#FF5938",
@@ -123,14 +115,15 @@ export function LatestNews() {
                   gap: 4,
                 }}
               >
-                See more →
+                Read more →
               </a>
             </article>
           ))}
         </div>
 
         <div style={{ textAlign: "center", marginTop: 48 }}>
-          <button
+          <a
+            href="/resources"
             style={{
               background: "transparent",
               color: "#1f1e1e",
@@ -139,10 +132,12 @@ export function LatestNews() {
               padding: "14px 32px",
               fontSize: 15,
               cursor: "pointer",
+              textDecoration: "none",
+              display: "inline-block",
             }}
           >
-            See all news
-          </button>
+            See all resources
+          </a>
         </div>
       </div>
 

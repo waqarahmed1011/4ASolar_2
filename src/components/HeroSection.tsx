@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export function HeroSection() {
   return (
     <section
@@ -41,7 +43,7 @@ export function HeroSection() {
             whiteSpace: "pre-line",
           }}
         >
-          {"Fit for Purpose\nEnergy"}
+          {"Keep It Simple."}
         </h1>
 
         <p
@@ -64,8 +66,8 @@ export function HeroSection() {
             flexWrap: "wrap",
           }}
         >
-          <a
-            href="#"
+          <Link
+            href="/#contact"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -80,10 +82,10 @@ export function HeroSection() {
               whiteSpace: "nowrap",
             }}
           >
-            Build with us →
-          </a>
+            Get a Free Quote →
+          </Link>
           <a
-            href="#"
+            href="tel:773-502-1529"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -99,7 +101,7 @@ export function HeroSection() {
               whiteSpace: "nowrap",
             }}
           >
-            Discover our work
+            Call Us
           </a>
         </div>
       </div>

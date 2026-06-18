@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 
-const tabs = ["All", "Hydrogen", "Solar", "Wind"] as const;
+const tabs = ["Morton Grove (HQ)", "Skokie · Evanston · Niles", "Glenview · Park Ridge", "Schaumburg & beyond"] as const;
 type Tab = (typeof tabs)[number];
 
 export function MapSection() {
-  const [activeTab, setActiveTab] = useState<Tab>("All");
+  const [activeTab, setActiveTab] = useState<Tab>("Morton Grove (HQ)");
 
   return (
     <section style={{ background: "#eee8e2", padding: "80px 0" }}>
@@ -31,9 +31,9 @@ export function MapSection() {
               lineHeight: 1.1,
             }}
           >
-            <span style={{ color: "#1f1e1e" }}>Worldwide</span>
+            <span style={{ color: "#1f1e1e" }}>Serving All of</span>
             <br />
-            <span style={{ color: "#9f908d" }}>impact</span>
+            <span style={{ color: "#9f908d" }}>Illinois</span>
           </h2>
 
           <p
@@ -44,10 +44,11 @@ export function MapSection() {
               lineHeight: 1.4,
             }}
           >
-            Present across 3 continents, in 15+ countries
+            Based in Morton Grove. Available across Chicagoland and statewide.
           </p>
 
-          <button
+          <a
+            href="#contact"
             style={{
               background: "transparent",
               color: "#1f1e1e",
@@ -56,17 +57,19 @@ export function MapSection() {
               padding: "12px 24px",
               fontSize: 14,
               cursor: "pointer",
+              textDecoration: "none",
+              display: "inline-block",
               transition: "border-color 0.2s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(31,30,30,0.6)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(31,30,30,0.6)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(31,30,30,0.25)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(31,30,30,0.25)";
             }}
           >
-            Discover all our projects
-          </button>
+            Check if we serve your area
+          </a>
         </div>
 
         <div>
@@ -81,21 +84,9 @@ export function MapSection() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/virya-image-27.jpg"
-              alt="World map"
-              style={{ width: "100%", height: "auto", opacity: 0.3 }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                top: "25%",
-                left: "48%",
-                width: 120,
-                height: 80,
-                background:
-                  "radial-gradient(circle, rgba(255,89,56,0.8) 0%, rgba(255,89,56,0.2) 70%)",
-                borderRadius: "50%",
-              }}
+              src="/images/chicago-aerial.jpg"
+              alt="Chicago and Chicagoland area"
+              style={{ width: "100%", height: "auto" }}
             />
           </div>
 
@@ -109,9 +100,10 @@ export function MapSection() {
               flexWrap: "wrap",
             }}
           >
-            <span>99 worldwide projects</span>
-            <span>3 projects in Asia +</span>
-            <span>97 projects in Europe +</span>
+            <span>Chicagoland</span>
+            <span>North Shore</span>
+            <span>Northwest Suburbs</span>
+            <span>All of Illinois</span>
           </div>
 
           <div

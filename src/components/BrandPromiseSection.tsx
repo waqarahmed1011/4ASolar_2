@@ -1,19 +1,18 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+const services = [
+  "Residential Solar",
+  "Commercial Solar",
+  "Solar for Non-Profits",
+  "Battery Storage",
+  "EV Chargers",
+  "Service & Repairs",
+  "Solar Incentives",
+];
 
 export function BrandPromiseSection() {
-  const [animData, setAnimData] = useState<object | null>(null);
-
-  useEffect(() => {
-    fetch("/lottie/ses-illu-en.json")
-      .then((r) => r.json())
-      .then(setAnimData);
-  }, []);
-
   return (
     <section style={{ background: "#ffffff", padding: "100px 0" }}>
       <div
@@ -38,9 +37,9 @@ export function BrandPromiseSection() {
               marginBottom: 24,
             }}
           >
-            <span style={{ color: "#1f1e1e" }}>Our Fit For Purpose</span>
+            <span style={{ color: "#1f1e1e" }}>Our &ldquo;Keep It Simple&rdquo;</span>
             <br />
-            <span style={{ color: "#9f908d" }}>Brand Promise</span>
+            <span style={{ color: "#9f908d" }}>Philosophy</span>
           </h2>
 
           <p
@@ -52,14 +51,11 @@ export function BrandPromiseSection() {
               marginBottom: 32,
             }}
           >
-            For Virya Energy, the energy transition must be adapted to each
-            reality. Our &ldquo;fit for purpose&rdquo; approach reflects our
-            commitment to developing customized solutions that exactly meet
-            everyone&apos;s needs. By simplifying access to renewable energy, we
-            are building a path towards a sustainable future.
+            At 4A Solar, we believe going solar should be straightforward. Our team brings over 15 years of hands-on solar experience and a deep engineering background to every project — designing systems sized to your actual energy needs, not the biggest sale. No pressure. No guesswork. Just solar done right.
           </p>
 
-          <button
+          <Link
+            href="/about"
             style={{
               background: "transparent",
               color: "#1f1e1e",
@@ -68,33 +64,128 @@ export function BrandPromiseSection() {
               padding: "12px 28px",
               fontSize: 15,
               cursor: "pointer",
+              textDecoration: "none",
+              display: "inline-block",
               transition: "border-color 0.2s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(31,30,30,0.6)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(31,30,30,0.6)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(31,30,30,0.25)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(31,30,30,0.25)";
             }}
           >
-            Learn more
-          </button>
+            Learn more about Us
+          </Link>
         </div>
 
-        <div className="flex justify-center">
-          <div style={{ maxWidth: 380, width: "100%" }}>
-            {animData && (
-              <Lottie
-                animationData={animData}
-                loop
-                style={{ width: "100%" }}
-              />
-            )}
+        {/* Scrolling services ticker */}
+        <div
+          style={{
+            overflow: "hidden",
+            borderRadius: 20,
+            padding: "40px 0",
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          {/* Row 1: scrolls left */}
+          <div style={{ overflow: "hidden" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                gap: 12,
+                animation: "ticker-left 22s linear infinite",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {[...services, ...services].map((s, i) => (
+                <span
+                  key={i}
+                  style={{
+                    background: "#FF5938",
+                    color: "#ffffff",
+                    borderRadius: 999,
+                    padding: "12px 22px",
+                    fontSize: 15,
+                    flexShrink: 0,
+                  }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: scrolls right */}
+          <div style={{ overflow: "hidden" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                gap: 12,
+                animation: "ticker-right 22s linear infinite",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {[...services, ...services].map((s, i) => (
+                <span
+                  key={i}
+                  style={{
+                    background: "#FF5938",
+                    color: "#ffffff",
+                    borderRadius: 999,
+                    padding: "12px 22px",
+                    fontSize: 15,
+                    flexShrink: 0,
+                  }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3: scrolls left */}
+          <div style={{ overflow: "hidden" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                gap: 12,
+                animation: "ticker-left 22s linear infinite",
+                animationDelay: "-11s",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {[...services, ...services].map((s, i) => (
+                <span
+                  key={i}
+                  style={{
+                    background: "#FF5938",
+                    color: "#ffffff",
+                    borderRadius: 999,
+                    padding: "12px 22px",
+                    fontSize: 15,
+                    flexShrink: 0,
+                  }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       <style>{`
+        @keyframes ticker-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes ticker-right {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
         @media (max-width: 768px) {
           .brand-promise-grid {
             grid-template-columns: 1fr !important;

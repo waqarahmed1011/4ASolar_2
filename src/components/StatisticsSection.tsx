@@ -1,24 +1,15 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+import Link from "next/link";
 
 const stats = [
-  { lottie: "/lottie/wind.json", number: "625 MW", label: "Installed production capacity" },
-  { lottie: "/lottie/profile.json", number: "700+", label: "Employees over multiple markets" },
-  { lottie: "/lottie/fuel.json", number: "6", label: "Hydrogen service stations" },
-  { lottie: "/lottie/globe.json", number: "15+", label: "Countries with a Virya presence" },
+  { number: "15+", label: "Years of solar experience" },
+  { number: "100+", label: "Solar PV systems installed" },
+  { number: "200+", label: "Solar professionals trained" },
+  { number: "100%", label: "5-star customer satisfaction" },
 ];
 
-function StatBox({ lottieUrl, number, label }: { lottieUrl: string; number: string; label: string }) {
-  const [animData, setAnimData] = useState<object | null>(null);
-
-  useEffect(() => {
-    fetch(lottieUrl).then((r) => r.json()).then(setAnimData);
-  }, [lottieUrl]);
-
+function StatBox({ number, label }: { number: string; label: string }) {
   return (
     <div
       style={{
@@ -32,9 +23,6 @@ function StatBox({ lottieUrl, number, label }: { lottieUrl: string; number: stri
         gap: 12,
       }}
     >
-      {animData && (
-        <Lottie animationData={animData} loop style={{ width: 60, height: 60 }} />
-      )}
       <span
         style={{
           fontSize: "clamp(36px, 4vw, 52px)",
@@ -72,7 +60,7 @@ export function StatisticsSection() {
           display: "grid",
           gridTemplateColumns: "1fr 2fr",
           gap: 32,
-          alignItems: "start",
+          alignItems: "stretch",
         }}
       >
         {/* Left card */}
@@ -98,13 +86,13 @@ export function StatisticsSection() {
               color: "#ffffff",
             }}
           >
-            <span style={{ color: "#FF5938" }}>Virya</span>
-            {" "}Energy
-            <br />in a few
+            <span style={{ color: "#FF5938" }}>4A Solar</span>
+            <br />by the
             <br />numbers
           </h2>
 
-          <button
+          <Link
+            href="/about"
             style={{
               background: "transparent",
               color: "#ffffff",
@@ -114,17 +102,19 @@ export function StatisticsSection() {
               fontSize: 14,
               cursor: "pointer",
               width: "fit-content",
+              textDecoration: "none",
+              display: "inline-block",
               transition: "border-color 0.2s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.9)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.9)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.5)";
             }}
           >
-            Learn more
-          </button>
+            About Us
+          </Link>
 
           {/* Decorative diagonal stripe */}
           <div
@@ -148,12 +138,12 @@ export function StatisticsSection() {
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: 16,
+            height: "100%",
           }}
         >
           {stats.map((s) => (
             <StatBox
               key={s.number}
-              lottieUrl={s.lottie}
               number={s.number}
               label={s.label}
             />
