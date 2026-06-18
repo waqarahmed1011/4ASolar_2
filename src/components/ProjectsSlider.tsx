@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useInView, fadeUp } from "@/hooks/useInView";
 
 const testimonials = [
@@ -31,26 +31,45 @@ const testimonials = [
   },
 ] as const;
 
-const CARD_WIDTH = 380;
 const CARD_GAP = 24;
 
 export function ProjectsSlider() {
   const [offset, setOffset] = useState(0);
+  const [cardWidth, setCardWidth] = useState(380);
+  const [isMobile, setIsMobile] = useState(false);
   const { ref, inView } = useInView();
-  const maxOffset = (testimonials.length - 3) * (CARD_WIDTH + CARD_GAP);
 
-  const prev = () => setOffset((o) => Math.max(0, o - (CARD_WIDTH + CARD_GAP)));
-  const next = () => setOffset((o) => Math.min(maxOffset, o + (CARD_WIDTH + CARD_GAP)));
+  useEffect(() => {
+    const update = () => {
+      const mobile = window.innerWidth < 640;
+      setIsMobile(mobile);
+      setCardWidth(mobile ? window.innerWidth - 48 : 380);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  useEffect(() => { setOffset(0); }, [isMobile]);
+
+  const maxOffset = isMobile
+    ? (testimonials.length - 1) * (cardWidth + CARD_GAP)
+    : (testimonials.length - 3) * (cardWidth + CARD_GAP);
+
+  const prev = () => setOffset((o) => Math.max(0, o - (cardWidth + CARD_GAP)));
+  const next = () => setOffset((o) => Math.min(maxOffset, o + (cardWidth + CARD_GAP)));
 
   return (
     <section style={{ background: "#eee8e2", padding: "80px 0" }}>
-      <div ref={ref} style={{ maxWidth: 1440, margin: "0 auto", padding: "0 80px" }}>
+      <div ref={ref} style={{ maxWidth: 1440, margin: "0 auto", padding: isMobile ? "0 24px" : "0 80px" }}>
         {/* Header row */}
         <div
           style={{
             display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             justifyContent: "space-between",
-            alignItems: "flex-start",
+            alignItems: isMobile ? "flex-start" : "flex-start",
+            gap: isMobile ? 16 : 0,
             marginBottom: 40,
             ...fadeUp(inView),
           }}
@@ -118,8 +137,9 @@ export function ProjectsSlider() {
                   key={i}
                   style={{
                     flexShrink: 0,
-                    width: CARD_WIDTH,
-                    height: 520,
+                    width: cardWidth,
+                    height: isMobile ? "auto" : 520,
+                    minHeight: isMobile ? 320 : undefined,
                     borderRadius: 20,
                     overflow: "hidden",
                     position: "relative",
@@ -197,7 +217,7 @@ export function ProjectsSlider() {
             style={{
               position: "absolute",
               top: "50%",
-              left: -24,
+              left: isMobile ? 8 : -24,
               transform: "translateY(-50%)",
               background: "white",
               borderRadius: "50%",
@@ -210,6 +230,7 @@ export function ProjectsSlider() {
               cursor: offset === 0 ? "default" : "pointer",
               border: "none",
               opacity: offset === 0 ? 0.4 : 1,
+              zIndex: 2,
             }}
           >
             ←
@@ -220,7 +241,7 @@ export function ProjectsSlider() {
             style={{
               position: "absolute",
               top: "50%",
-              right: -24,
+              right: isMobile ? 8 : -24,
               transform: "translateY(-50%)",
               background: "white",
               borderRadius: "50%",

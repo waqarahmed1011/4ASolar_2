@@ -65,7 +65,7 @@ export function SiteHeader({ alwaysScrolled = false }: SiteHeaderProps) {
               }),
         }}
       >
-        <div className="virya-wrapper flex items-center justify-between">
+        <div className="max-w-[1440px] mx-auto flex items-center justify-between px-6 sm:px-10 lg:px-20 w-full">
           <Link href="/" className="shrink-0">
             <Image
               src="/images/4asolar-logo.png"
@@ -98,8 +98,20 @@ export function SiteHeader({ alwaysScrolled = false }: SiteHeaderProps) {
           <div className="hidden lg:flex items-center gap-4 shrink-0">
             <a
               href="tel:773-502-1529"
-              className="virya-btn-primary"
-              style={{ padding: "10px 20px", fontSize: 14, whiteSpace: "nowrap" }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                background: "#ff5938",
+                color: "#ffffff",
+                borderRadius: "999px",
+                padding: "10px 20px",
+                fontSize: 14,
+                fontWeight: 400,
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+                border: "none",
+                cursor: "pointer",
+              }}
             >
               773-502-1529
             </a>
@@ -170,9 +182,22 @@ export function SiteHeader({ alwaysScrolled = false }: SiteHeaderProps) {
           <div className="mt-auto pt-8 flex flex-col gap-4">
             <a
               href="tel:773-502-1529"
-              className="virya-btn-primary"
               onClick={() => setMobileOpen(false)}
-              style={{ textAlign: "center" }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#ff5938",
+                color: "#ffffff",
+                borderRadius: "999px",
+                padding: "14px 28px",
+                fontSize: 16,
+                fontWeight: 400,
+                textDecoration: "none",
+                textAlign: "center",
+                border: "none",
+                cursor: "pointer",
+              }}
             >
               773-502-1529
             </a>

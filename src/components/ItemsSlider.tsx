@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useInView, fadeUp } from "@/hooks/useInView";
 
@@ -63,22 +63,37 @@ const slides = [
   },
 ];
 
-const CARD_WIDTH = 416;
 const CARD_GAP = 24;
 
 export function ItemsSlider() {
   const [offset, setOffset] = useState(0);
+  const [cardWidth, setCardWidth] = useState(416);
+  const [isMobile, setIsMobile] = useState(false);
   const { ref, inView } = useInView();
-  const maxOffset = (slides.length - 3) * (CARD_WIDTH + CARD_GAP);
 
-  const prev = () =>
-    setOffset((o) => Math.max(0, o - (CARD_WIDTH + CARD_GAP)));
-  const next = () =>
-    setOffset((o) => Math.min(maxOffset, o + (CARD_WIDTH + CARD_GAP)));
+  useEffect(() => {
+    const update = () => {
+      const mobile = window.innerWidth < 640;
+      setIsMobile(mobile);
+      setCardWidth(mobile ? window.innerWidth - 48 : 416);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  useEffect(() => { setOffset(0); }, [isMobile]);
+
+  const maxOffset = isMobile
+    ? (slides.length - 1) * (cardWidth + CARD_GAP)
+    : (slides.length - 3) * (cardWidth + CARD_GAP);
+
+  const prev = () => setOffset((o) => Math.max(0, o - (cardWidth + CARD_GAP)));
+  const next = () => setOffset((o) => Math.min(maxOffset, o + (cardWidth + CARD_GAP)));
 
   return (
     <section style={{ background: "#eee8e2", padding: "80px 0" }}>
-      <div ref={ref} style={{ maxWidth: 1440, margin: "0 auto", padding: "0 80px" }}>
+      <div ref={ref} style={{ maxWidth: 1440, margin: "0 auto", padding: isMobile ? "0 24px" : "0 80px" }}>
         <h2
           style={{
             fontSize: "clamp(36px, 3.5vw, 48px)",
@@ -108,7 +123,7 @@ export function ItemsSlider() {
                   key={i}
                   style={{
                     flexShrink: 0,
-                    width: CARD_WIDTH,
+                    width: cardWidth,
                     borderRadius: 20,
                     overflow: "hidden",
                     background: "#ffffff",
@@ -162,7 +177,7 @@ export function ItemsSlider() {
             style={{
               position: "absolute",
               top: "50%",
-              left: -24,
+              left: isMobile ? 8 : -24,
               transform: "translateY(-50%)",
               background: "white",
               borderRadius: "50%",
@@ -176,6 +191,7 @@ export function ItemsSlider() {
               border: "none",
               opacity: offset === 0 ? 0.4 : 1,
               transition: "opacity 0.2s",
+              zIndex: 2,
             }}
           >
             ←
@@ -186,7 +202,7 @@ export function ItemsSlider() {
             style={{
               position: "absolute",
               top: "50%",
-              right: -24,
+              right: isMobile ? 8 : -24,
               transform: "translateY(-50%)",
               background: "white",
               borderRadius: "50%",

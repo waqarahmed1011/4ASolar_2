@@ -111,6 +111,7 @@ export function HighlighterServices() {
       >
         <div style={fadeUp(inView)}>
           <h2
+            className="highlighter-heading"
             style={{
               fontSize: "clamp(32px, 3.5vw, 52px)",
               fontWeight: 400,
@@ -121,6 +122,7 @@ export function HighlighterServices() {
             }}
           >
             Solar solutions for{" "}
+            <br className="highlighter-heading-break" />
             <span style={{ color: "#FF5938" }}>{displayedWord}</span>
             <span style={{ opacity: showCursor ? 1 : 0, color: "#FF5938" }}>
               |
@@ -179,16 +181,16 @@ export function HighlighterServices() {
                 transition: "opacity 0.4s ease",
               }}
             />
-            <div style={{ ...tagStyle, top: 24, left: -20 }}>
+            <div className="highlighter-tag" style={{ ...tagStyle, top: 24, left: -20 }}>
               {currentPanel.tags[0]}
             </div>
-            <div style={{ ...tagStyle, top: 24, right: -20 }}>
+            <div className="highlighter-tag" style={{ ...tagStyle, top: 24, right: -20 }}>
               {currentPanel.tags[1]}
             </div>
-            <div style={{ ...tagStyle, bottom: 80, left: -20 }}>
+            <div className="highlighter-tag" style={{ ...tagStyle, bottom: 80, left: -20 }}>
               {currentPanel.tags[2]}
             </div>
-            <div style={{ ...tagStyle, bottom: 24, right: -20 }}>
+            <div className="highlighter-tag" style={{ ...tagStyle, bottom: 24, right: -20 }}>
               {currentPanel.tags[3]}
             </div>
           </div>
@@ -196,6 +198,7 @@ export function HighlighterServices() {
       </div>
 
       <style>{`
+        .highlighter-heading-break { display: none; }
         @media (max-width: 768px) {
           .highlighter-grid {
             grid-template-columns: 1fr !important;
@@ -204,6 +207,17 @@ export function HighlighterServices() {
           .highlighter-right img {
             width: 100% !important;
             height: 300px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .highlighter-heading {
+            font-size: clamp(24px, 7vw, 32px) !important;
+          }
+          .highlighter-heading-break {
+            display: block;
+          }
+          .highlighter-tag {
+            display: none !important;
           }
         }
       `}</style>

@@ -96,7 +96,7 @@ export function BrandPromiseSection() {
           }}
         >
           {/* Row 1: scrolls left */}
-          <div style={{ overflow: "hidden" }}>
+          <div style={{ overflow: "hidden", width: "100%" }}>
             <div
               style={{
                 display: "inline-flex",
@@ -124,7 +124,7 @@ export function BrandPromiseSection() {
           </div>
 
           {/* Row 2: scrolls right */}
-          <div style={{ overflow: "hidden" }}>
+          <div style={{ overflow: "hidden", width: "100%" }}>
             <div
               style={{
                 display: "inline-flex",
@@ -152,7 +152,7 @@ export function BrandPromiseSection() {
           </div>
 
           {/* Row 3: scrolls left */}
-          <div style={{ overflow: "hidden" }}>
+          <div style={{ overflow: "hidden", width: "100%" }}>
             <div
               style={{
                 display: "inline-flex",

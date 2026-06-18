@@ -44,8 +44,9 @@ export function SiteFooter() {
   return (
     <footer style={{ background: "#08426E" }}>
       {/* Pre-footer CTA card */}
-      <div style={{ padding: "60px 80px 0" }}>
+      <div className="footer-cta-outer" style={{ padding: "60px 80px 0" }}>
         <div
+          className="footer-cta-card"
           style={{
             background: "#0f6499",
             borderRadius: 24,
@@ -108,7 +109,7 @@ export function SiteFooter() {
       </div>
 
       {/* Footer content */}
-      <div style={{ padding: "60px 80px 40px", maxWidth: 1440, margin: "0 auto" }}>
+      <div className="footer-content" style={{ padding: "60px 80px 40px", maxWidth: 1440, margin: "0 auto" }}>
         {/* Logo */}
         <div style={{ marginBottom: 24 }}>
           <Image
@@ -239,10 +240,28 @@ export function SiteFooter() {
           .footer-nav-grid {
             grid-template-columns: 1fr 1fr !important;
           }
+          .footer-cta-outer {
+            padding: 40px 24px 0 !important;
+          }
+          .footer-cta-card {
+            padding: 40px 32px !important;
+          }
+          .footer-content {
+            padding: 40px 24px 32px !important;
+          }
         }
         @media (max-width: 480px) {
           .footer-nav-grid {
             grid-template-columns: 1fr !important;
+          }
+          .footer-cta-outer {
+            padding: 32px 16px 0 !important;
+          }
+          .footer-cta-card {
+            padding: 32px 24px !important;
+          }
+          .footer-content {
+            padding: 32px 16px 24px !important;
           }
         }
       `}</style>
