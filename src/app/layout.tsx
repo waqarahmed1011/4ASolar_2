@@ -10,17 +10,17 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Virya Energy | Fit For Purpose Energy",
+  title: "4A Solar | Keep It Simple",
   description:
-    "Fit for purpose energy: Virya Energy delivers tailored renewable solutions in solar, wind and hydrogen to power a sustainable future.",
+    "At 4A Solar, we believe going solar should be straightforward.",
   icons: {
-    icon: "/seo/favicon.png",
+    icon: "/images/brand_assets/favicon.png",
   },
   openGraph: {
-    title: "Virya Energy | Fit For Purpose Energy",
+    title: "4A Solar | Keep It Simple",
     description:
-      "Fit for purpose energy: Virya Energy delivers tailored renewable solutions in solar, wind and hydrogen to power a sustainable future.",
-    siteName: "Virya Energy",
+      "At 4A Solar, we believe going solar should be straightforward.",
+    siteName: "4A Solar",
     locale: "en_GB",
     type: "website",
   },
